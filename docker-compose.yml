@@ -1,0 +1,42 @@
+version:  "3"
+services:
+  django_default:
+    build: .
+    image: django_default
+    container_name: django_default
+    restart: always    
+    ports: 
+      - 8000:8001
+    volumes:
+      - ./volumes/database:/database
+      - ./volumes/static:/srv/static
+      - ./volumes/media:/srv/media
+    environment:
+      - dds=PROD
+    links:
+      - django_db
+
+  django_db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=qawsedrf
+
+  adminer:
+    image: adminer
+    restart: always
+    links:
+      - django_db
+    ports:
+      - 8080:8080
+  
+  django_db_admin:
+    image: dpage/pgadmin4
+    ports:
+      - 8081:80
+    restart: always
+    links:
+      - django_db
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=qawsedrf 

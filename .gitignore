@@ -1,0 +1,4 @@
+volumes
+.vscode
+*.sqlite3
+__pycache__
