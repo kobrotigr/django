@@ -8,9 +8,9 @@ services:
     ports: 
       - 8000:8001
     volumes:
-      - ./volumes/database:/database
-      - ./volumes/static:/srv/static
-      - ./volumes/media:/srv/media
+      - /var/opt/django_default/volumes/database:/database
+      - /var/opt/django_default/volumes/static:/srv/static
+      - /var/opt/django_default/volumes/media:/srv/media
     environment:
       - dds=PROD
     links:
